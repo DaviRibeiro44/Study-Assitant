@@ -1,1 +1,49 @@
-{"cells":[{"cell_type":"code","execution_count":1,"metadata":{"colab":{"base_uri":"https://localhost:8080/"},"id":"6XuXj4Pf8lGg","executionInfo":{"status":"ok","timestamp":1763657537075,"user_tz":180,"elapsed":68541,"user":{"displayName":"Han Lue","userId":"06715653250830321382"}},"outputId":"f4eaec54-b06f-4536-dbd3-f737acee5e27"},"outputs":[{"output_type":"stream","name":"stdout","text":["Mounted at /content/drive\n","\n","Menu :\n","1. Registrar Estudo\n","2. Mostrar Histórico de Estudo\n","3. Sair\n","Escolha uma opção: 3\n","Saindo...\n"]}],"source":["\n","from google.colab import drive\n","import os\n","\n","drive.mount('/content/drive')\n","\n","caminho = '/content/drive/MyDrive/estudos/estudos.txt'\n","\n","os.makedirs(os.path.dirname(caminho), exist_ok=True)\n","\n","def registrar_estudo():\n","    materia = input(\"Matéria: \")\n","    tempo = input(\"Tempo (min): \")\n","    prioridade = input(\"Prioridade (Alta, Média, Baixa)\")\n","    with open(caminho, 'a')as arquivo:\n","     arquivo.write(f\"Matéria: {materia}, Tempo: {tempo}, Prioridade: {prioridade}\\n\")\n","    print(\"Estudo Registrado\")\n","\n","def mostrar():\n","    print(\"Histórico de Estudo:\")\n","\n","    with open(caminho, 'r')as arquivo:\n","        print(arquivo.read())\n","    try:\n","        with open(caminho, 'r') as arquivo:\n","            conteudo = arquivo.read()\n","            if conteudo:\n","                print(conteudo)\n","            else:\n","                print(\"Nenhum estudo registrado.\")\n","    except: FileNotFoundError\n","\n","\n","while True:\n","    print(\"\\nMenu :\")\n","    print(\"1. Registrar Estudo\")\n","    print(\"2. Mostrar Histórico de Estudo\")\n","    print(\"3. Sair\")\n","    op = input(\"Escolha uma opção: \")\n","    if op == '1':\n","        registrar_estudo()\n","    elif op == '2':\n","        mostrar()\n","    elif op == '3':\n","        print(\"Saindo...\")\n","        break\n","    else:\n","        print(\"Opção inválida. Tente novamente.\")\n","\n","\n","\n","\n"]}],"metadata":{"colab":{"provenance":[],"authorship_tag":"ABX9TyNNPOisDvtrUmH/b0JyqIXO"},"kernelspec":{"display_name":"Python 3","name":"python3"},"language_info":{"name":"python"}},"nbformat":4,"nbformat_minor":0}
+import os
+
+caminho = "estudos.txt"
+
+os.makedirs(os.path.dirname(caminho),
+            exist_ok=True) if os.path.dirname(caminho) else None
+
+
+def registrar_estudo():
+    materia = input("Matéria: ")
+    tempo = input("Tempo (min): ")
+    prioridade = input("Prioridade (Alta, Média, Baixa)")
+    with open(caminho, 'a')as arquivo:
+        arquivo.write(
+            f"Matéria: {materia}, Tempo: {tempo}, Prioridade: {prioridade}\n")
+    print("Estudo Registrado")
+
+
+def mostrar():
+    print("Histórico de Estudo:")
+
+    with open(caminho, 'r')as arquivo:
+        print(arquivo.read())
+    try:
+        with open(caminho, 'r') as arquivo:
+            conteudo = arquivo.read()
+            if conteudo:
+                print(conteudo)
+            else:
+                print("Nenhum estudo registrado.")
+    except:
+        FileNotFoundError
+
+
+while True:
+    print("\nMenu :")
+    print("1. Registrar Estudo")
+    print("2. Mostrar Histórico de Estudo")
+    print("3. Sair")
+    op = input("Escolha uma opção: ")
+    if op == '1':
+        registrar_estudo()
+    elif op == '2':
+        mostrar()
+    elif op == '3':
+        print("Saindo...")
+        break
+    else:
+        print("Opção inválida. Tente novamente.")
